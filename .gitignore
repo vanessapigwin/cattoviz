@@ -155,7 +155,6 @@ cython_debug/
 
 #piglig
 temp/
-site.webmanifest
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
