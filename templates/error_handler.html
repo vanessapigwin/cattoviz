@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Catto Viz - Error</title>
+    <!-- META TAGS -->
+    <!-- CSS FILES -->
+    <link href="{{ url_for('static', filename='/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='/css/fontawesome.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- SITE WRAPPER -->
+    <div id="eskimo-site-wrapper">
+        <!-- MAIN CONTAINER -->
+        <main id="eskimo-main-container">
+            <div class="container">
+                <div class="row">
+                    <!-- ALERTS -->
+                    <div class="col-12 col-lg-6">
+                        <!-- ALERT DANGER -->
+                        <div class="alert alert-danger">
+                            <h6>Page Not Found</h6>
+                            <p>Oh snap! Change a few things up and try submitting again.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- JS FILES -->
+    <script src="{{ url_for('static', filename='/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% include "header.html" %}
+                <!-- PAGE TITLE -->
+                <div class="eskimo-page-title">
+                    <h1 class="no-border">App Gallery</h1>
+                </div>
+                <h2>App Title</h2>
+                <!-- IMAGE GALLERY -->
+                <div class="eskimo-masonry-grid eskimo-gallery">
+                    <div class="eskimo-one-column" data-columns>
+                        <!-- GALLERY ITEM 1 -->
+                        <div class="eskimo-featured-img">
+                            <img src="{{ url_for('static', filename='/images/900x600.png') }}" alt="" />
+                        </div>
+                        <div class="eskimo-page-content">
+                            <p>App link</p>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </main>
+{% include "footer.html" %}
+</body>
+</html>

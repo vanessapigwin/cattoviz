@@ -1,0 +1,82 @@
+{% include "header.html" %}
+                <!-- SLIDER -->
+                <div class="eskimo-carousel-container eskimo-bg-loader">
+                    <div id="eskimo-post-slider" class="eskimo-slider">
+                        {% for blog in featured: %}
+                            <!-- SLIDE 1 -->
+                            <div>
+                                <a class="eskimo-slider-img" href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"></a>
+                                <ul class="eskimo-slider-image-meta eskimo-image-meta-post">
+                                    <li><a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"><span class="badge badge-default">{{blog.date_posted}}</span></a></li>
+                                    <li><a href="{{ url_for('categories', category=blog.category.cat_name,page=1) }}"><span class="badge badge-default">{{blog.category.cat_name}}</span></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                                <img src="{{ blog.thumbnail }}" alt="cattoviz" />
+                                <div class="eskimo-slider-desc">
+                                    <div class="eskimo-slider-desc-inner">
+                                        <h2 class="card-title">{{blog.title}}</h2>
+                                        <p>{{ blog.subtitle }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- BLOG POSTS -->
+                {% for blog in blogs: %}
+                <!-- POST 1 -->
+                    <div class="card card-horizontal">
+                    <div class="card-body">
+                        <div class="card-horizontal-left">
+                            <div class="card-category">
+                                <a href="{{ url_for('categories', category=blog.category.cat_name, page=1) }}">{{blog.category.cat_name}}</a> </div>
+                            <h3 class="card-title"><a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{blog.title}}</a></h3>
+                            <div class="card-excerpt">
+                                <p>{{ blog.subtitle }}</p>
+                            </div>
+                            <div class="card-horizontal-meta">
+                                <div class="eskimo-author-meta">
+                                    By <a class="author-meta" href="{{ url_for('about') }}">Vanessa</a>
+                                </div>
+                                <div class="eskimo-date-meta">
+                                    <a href="#">{{blog.date_posted}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-horizontal-right" data-img="{{blog.thumbnail}}">
+                            <a class="card-featured-img" href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- VIEW ALL BUTTON -->
+                <div class="eskimo-view-more">
+                    <a class="btn btn-default" href="{{ url_for('all_blogs', page=1) }}">VIEW ALL POSTS</a>
+                </div>
+            </div>
+        </main>
+{% include "footer.html" %}
+    <!-- POST SLIDER -->
+    <script>
+        (function($) {
+            "use strict";
+            $(document).ready(function() {
+                $('#eskimo-post-slider').slick({
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    slidesToScroll: 1,
+                    adaptiveHeight: true,
+                    slidesToShow: 1,
+                    arrows: true,
+                    dots: false,
+                    fade: true
+                });
+            });
+            $(window).on('load', function() {
+                $('#eskimo-post-slider').css('opacity', '1');
+                $('#eskimo-post-slider').parent().removeClass('eskimo-bg-loader');
+            });
+        })(jQuery);
+    </script>
+</body>
+</html>

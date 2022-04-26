@@ -1,0 +1,65 @@
+{% include "header.html" %}
+                <!-- PAGE TITLE -->
+                 <div class="eskimo-page-title">
+                     <h1>
+                         {% if blogs.total > 1 %}
+                         <span>{{ blogs.total }} Results Found</span>
+                         {% else %}
+                         <span>1 Result Found</span>
+                         {% endif %}
+                     </h1>
+                     <p class="eskimo-page-subtitle">Search Results for: {{tag}}</p>
+                </div>
+                <!-- BLOG POSTS -->
+                <div class="eskimo-masonry-grid">
+                    <div class="eskimo-two-columns" data-columns>
+                        {% for blog in blogs.items: %}
+                        <!-- POST 1 -->
+                        <div class="card-masonry">
+                            <div class="card">
+                                <a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">
+                                    <img class="card-vertical-img" src="{{blog.thumbnail}}" alt="{{blog.title}}" />
+                                </a>
+                                <div class="card-border">
+                                    <div class="card-body">
+                                        <div class="card-category">
+                                            <span><a href="{{ url_for('categories', category=blog.category.cat_name, page=1) }}">{{ blog.category.cat_name }}</a></span>
+                                        </div>
+                                        <h3 class="card-title">
+                                            <a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{ blog.title }}</a>
+                                        </h3>
+                                        <p>{{ blog.subtitle }}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="eskimo-author-meta">
+                                            By <a class="author-meta" href="{{ url_for('about') }}">Vanessa</a>
+                                        </div>
+                                        <div class="eskimo-date-meta">
+                                            <a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{ blog.date_posted }}</a>
+                                        </div>
+                                        <div class="eskimo-reading-meta">{{ blog.read_time }} min read</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- PAGINATION -->
+                <div class="eskimo-pager">
+                    <ul class='pagination flex-wrap'>
+                        {% if blogs.has_prev %}
+                        <li class='page-item'><a class='page-link' href="{{ url_for('all_with_tag', page=blogs.prev_num) }}"><i class="fa fa-chevron-left"></i></a></li>
+                        {% endif %}
+                        <li class='page-item active'><a class='page-link' href='#'>{{blogs.page}}</a></li>
+                        {% if blogs.has_next %}
+                        <li class='page-item'><a class='page-link' href="{{ url_for('all_with_tag', page=blogs.next_num) }}"><i class="fa fa-chevron-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </main>
+{% include "footer.html" %}
+</body>
+</html>

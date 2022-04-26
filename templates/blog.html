@@ -1,0 +1,78 @@
+{% include "header.html" %}
+                <!-- PAGE TITLE -->
+                <div class="eskimo-page-title">
+                    <h1 class="no-border">Blogs</h1>
+                </div>
+                <!-- BLOG POSTS -->
+                <!-- POST 1 -->
+                {% for blog in blogs.items %}
+                <div class="card card-horizontal">
+                    <div class="card-body">
+                        <div class="card-horizontal-left">
+                            <div class="card-category">
+                                <a href="{{ url_for('categories', category=blog.category.cat_name, page=1) }}">{{blog.category.cat_name}}</a>
+                            </div>
+                            <h3 class="card-title"><a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{blog.title}}</a></h3>
+                            <div class="card-excerpt">
+                                {{ blog.subtitle }}
+                            </div>
+                            <div class="card-horizontal-meta">
+                                <div class="eskimo-author-meta">
+                                    By <a class="author-meta" href="{{ url_for('about') }}">Vanessa</a>
+                                </div>
+                                <div class="eskimo-date-meta">
+                                    <a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{blog.date_posted}}</a>
+                                </div>
+                                <div class="eskimo-reading-meta">{{blog.read_time}} min read</div>
+                            </div>
+                        </div>
+                        <div class="card-horizontal-right" data-img="{{blog.thumbnail}}">
+                            <a class="card-featured-img" href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- PAGINATION -->
+                <div class="eskimo-pager">
+                    <ul class='pagination flex-wrap'>
+                        {% if blogs.has_prev %}
+                        <li class='page-item'><a class='page-link' href="{{ url_for('all_blogs', page=blogs.prev_num) }}"><i class="fa fa-chevron-left"></i></a></li>
+                        {% endif %}
+                        <li class='page-item active'><a class='page-link' href='#'>{{blogs.page}}</a></li>
+                        {% if blogs.has_next %}
+                        <li class='page-item'><a class='page-link' href="{{ url_for('all_blogs', page=blogs.next_num) }}"><i class="fa fa-chevron-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <!-- DIVIDER -->
+                <hr class="section-divider" />
+                <!-- CATEGORIES -->
+                <div class="eskimo-categories eskimo-widget">
+                    <h5 class="eskimo-title-with-border"><span>Categories</span></h5>
+                    <ul>
+                        {% for category in categories: %}
+                        <li>
+                            <a href="{{ url_for('categories', category=category.cat_name, page=1) }}">{{category.cat_name}}</a> <span class="badge badge-pill badge-default">{{ category.blogs|length }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- DIVIDER -->
+                <hr class="section-divider" />
+                <!--tags area -->
+                <div class="eskimo-widget-title">
+                    <h5 class="eskimo-title-with-border"><span>Tags</span></h5>
+                </div>
+                <div class="eskimo-carousel-container">
+                    <div class="eskimo-tag-cloud">
+                        {% for tag in tags: %}
+                            <a href="{{ url_for('all_with_tag', tag=tag.tag_name, page=1) }}">{{ tag.tag_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </main>
+{% include "footer.html" %}
+</body>
+</html>

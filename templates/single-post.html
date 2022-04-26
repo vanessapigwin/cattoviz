@@ -1,0 +1,64 @@
+{% include "header.html" %}
+                <!-- PAGE TITLE -->
+                <div class="eskimo-page-title">
+                    <h1><span>{{ blog.title }}</span></h1>
+                    <div class="eskimo-page-title-meta">
+                        <div class="eskimo-author-meta">
+                            By <a class="author-meta" href="{{ url_for('about') }}">Vanessa</a>
+                        </div>
+                        <div class="eskimo-cat-meta">
+                            In <a href="{{ url_for('categories', category=blog.category.cat_name, page=1) }}">{{blog.category.cat_name}}</a>
+                        </div>
+                        <div class="eskimo-date-meta">{{blog.date_posted}}</div>
+                        <div class="eskimo-reading-meta">{{ blog.read_time }} min read</div>
+                    </div>
+                </div>
+                <!-- FEATURED IMAGE -->
+                <div class="eskimo-featured-img">
+                    <img src="{{ blog.thumbnail }}" alt="" />
+                </div>
+                <!-- POST CONTENT -->
+                <div class="eskimo-page-content">
+                    {{ blog.body_text | safe }}
+                    <div class="clearfix"></div>
+                    <!-- TAGS -->
+                    <div class="eskimo-meta-tags">
+                        {% for tag in blog.tags: %}
+                        <span class="badge badge-default"><a href="{{ url_for('all_with_tag', tag=tag.tag_name, page=1) }}">{{tag.tag_name}}</a></span>
+                        {% endfor %}
+                    </div>
+                    <!-- POST NAVIGATION -->
+                    <div class="eskimo-post-nav-wrapper">
+                        <!-- PREVIOUS POST -->
+                        {% if blog.blog_id > 1 %}
+                        <div class="eskimo-post-nav-left-row">
+                            <div class="eskimo-post-nav-table">
+                                <a class="eskimo-post-nav" href="{{ url_for('get_single_post', selected_id=blog.blog_id-1) }}">
+                                    <i class="fa fa-chevron-left"></i>
+                                </a>
+                                <div class="eskimo-post-nav-link">
+                                    <a class="eskimo-post-nav" href="{{ url_for('get_single_post', selected_id=blog.blog_id-1) }}">Previous</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- NEXT POST -->
+                        {% if blog.blog_id < total_entries %}
+                        <div class="eskimo-post-nav-right-row">
+                            <div class="eskimo-post-nav-table">
+                                <div class="eskimo-post-nav-link">
+                                    <a class="eskimo-post-nav" href="{{ url_for('get_single_post', selected_id=blog.blog_id+1) }}">Next</a>
+                                </div>
+                                <a class="eskimo-post-nav" href="{{ url_for('get_single_post', selected_id=blog.blog_id+1) }}">
+                                    <i class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </main>
+{% include "footer.html" %}
+</body>
+</html>
