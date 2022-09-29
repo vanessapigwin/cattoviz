@@ -1,4 +1,4 @@
-import os
+import config
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
@@ -7,9 +7,7 @@ import random
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('APP_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('CLOUD_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(config.Config)
 db = SQLAlchemy(app)
 
 

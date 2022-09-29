@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: catto_flask
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - 5678:5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+    - postgres_data:/var/lib/postgresql/data/
+    - ./init-data.sh:/docker-entrypoint-initdb.d/init-data.sh
+    env_file:
+    - .env
+
+volumes:
+  postgres_data:
