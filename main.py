@@ -6,9 +6,12 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 import random
 
+csp = {
+    'default-src': '\'self\''
+}
 
 app = Flask(__name__)
-Talisman(app)
+Talisman(app, content_security_policy=csp)
 app.config.from_object(config.Config)
 db = SQLAlchemy(app)
 
