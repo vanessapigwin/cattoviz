@@ -1,5 +1,6 @@
 import config
 from flask import Flask, render_template
+from flask_talisman import Talisman
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
@@ -7,6 +8,7 @@ import random
 
 
 app = Flask(__name__)
+Talisman(app)
 app.config.from_object(config.Config)
 db = SQLAlchemy(app)
 
