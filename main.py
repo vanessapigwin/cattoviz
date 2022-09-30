@@ -1,6 +1,6 @@
 import config
 from flask import Flask, render_template
-from flask_talisman import Talisman
+from flask_talisman import Talisman, ALLOW_FROM
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
@@ -12,12 +12,13 @@ csp = {
         '*.googleapis.com',
         '*.gstatic.com'
         ],
-    'script-src': '\'self\''
+    'script-src': '\'self\'',
+    'style-src': '\'self\''
 }
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
-Talisman(
+talisman = Talisman(
     app, 
     content_security_policy=csp,
     content_security_policy_nonce_in=['script-src']
@@ -109,6 +110,7 @@ def categories(category, page=1):
 
 
 @app.route('/blog/<int:selected_id>')
+@talisman(frame_options=ALLOW_FROM, frame_options_allow_from='giphy.com')
 def get_single_post(selected_id):
     rows = BlogEntry.query.count()
     blog = BlogEntry.query.get(selected_id)
