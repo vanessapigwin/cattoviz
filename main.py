@@ -10,7 +10,9 @@ csp = {
     'default-src': [
         '\'self\'',
         '*.googleapis.com',
-        '*.gstatic.com'
+        '*.gstatic.com',
+        '*vimeo.com',
+        'giphy.com'
         ],
     'script-src': '\'self\'',
     'style-src': '\'self\''
@@ -21,7 +23,7 @@ app.config.from_object(config.Config)
 talisman = Talisman(
     app, 
     content_security_policy=csp,
-    content_security_policy_nonce_in=['script-src']
+    content_security_policy_nonce_in=['script-src', 'style-src']
     )
 db = SQLAlchemy(app)
 
@@ -110,7 +112,7 @@ def categories(category, page=1):
 
 
 @app.route('/blog/<int:selected_id>')
-@talisman(frame_options=ALLOW_FROM, frame_options_allow_from='giphy.com')
+@talisman(frame_options=ALLOW_FROM, frame_options_allow_from=['giphy.com', 'vimeo.com'])
 def get_single_post(selected_id):
     rows = BlogEntry.query.count()
     blog = BlogEntry.query.get(selected_id)
