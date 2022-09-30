@@ -7,12 +7,19 @@ from sqlalchemy.orm import relationship
 import random
 
 csp = {
-    'default-src': '\'self\''
+    'default-src': [
+        '\'self\'',
+        '*.googleapis.com'],
+    'script-src': '\'self\''
 }
 
 app = Flask(__name__)
-Talisman(app, content_security_policy=csp)
 app.config.from_object(config.Config)
+Talisman(
+    app, 
+    content_security_policy=csp,
+    content_security_policy_nonce_in=['script-src']
+    )
 db = SQLAlchemy(app)
 
 
