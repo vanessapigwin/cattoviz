@@ -11,7 +11,7 @@ csp = {
         '\'self\'',
         '*.googleapis.com',
         '*.gstatic.com',
-        '*vimeo.com',
+        'vimeo.com',
         'giphy.com'
         ],
     'script-src': '\'self\'',
