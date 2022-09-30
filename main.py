@@ -9,7 +9,9 @@ import random
 csp = {
     'default-src': [
         '\'self\'',
-        '*.googleapis.com'],
+        '*.googleapis.com',
+        '*.gstatic.com'
+        ],
     'script-src': '\'self\''
 }
 
