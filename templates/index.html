@@ -8,7 +8,7 @@
                                 <a class="eskimo-slider-img" href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"></a>
                                 <ul class="eskimo-slider-image-meta eskimo-image-meta-post">
                                     <li><a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}"><span class="badge badge-default">{{blog.date_posted}}</span></a></li>
-                                    <li><a href="{{ url_for('categories', category=blog.category.cat_name,page=1) }}"><span class="badge badge-default">{{blog.category.cat_name}}</span></a></li>
+                                    <li><a href="{{ url_for('categories', category=blog.category.id,page=1) }}"><span class="badge badge-default">{{blog.category.cat_name}}</span></a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                                 <img src="{{ blog.thumbnail }}" alt="cattoviz" />
@@ -29,7 +29,7 @@
                     <div class="card-body">
                         <div class="card-horizontal-left">
                             <div class="card-category">
-                                <a href="{{ url_for('categories', category=blog.category.cat_name, page=1) }}">{{blog.category.cat_name}}</a> </div>
+                                <a href="{{ url_for('categories', category=blog.category.id, page=1) }}">{{blog.category.cat_name}}</a> </div>
                             <h3 class="card-title"><a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{blog.title}}</a></h3>
                             <div class="card-excerpt">
                                 <p>{{ blog.subtitle }}</p>

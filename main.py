@@ -101,14 +101,15 @@ def all_blogs(page=1):
     return render_template('blog.html', blogs=posts, categories=categories, tags=tags)
 
 
-@app.route('/category/<category>/<int:page>')
-def categories(category, page=1):
+@app.route('/category/<int:category_id>/<int:page>')
+def categories(category_id, page=1):
     per_page = 4
-    category_queried = Category.query.filter_by(cat_name=category).first()
+    category_queried = Category.query.filter_by(id=category_id).first()
+    category_title = category_queried.cat_name
     blogs = BlogEntry.query.order_by(BlogEntry.date_posted.desc())\
-        .filter(BlogEntry.category_id.contains(category_queried.id))\
+        .filter(BlogEntry.category_id.contains(category_queried))\
         .paginate(page, per_page=per_page, max_per_page=per_page, error_out=True)
-    return render_template('category.html', category=category, blogs=blogs)
+    return render_template('category.html', category=category_title, blogs=blogs)
 
 
 @app.route('/blog/<int:selected_id>')
