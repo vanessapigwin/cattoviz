@@ -7,7 +7,7 @@
                             By <a class="author-meta" href="{{ url_for('about') }}">Vanessa</a>
                         </div>
                         <div class="eskimo-cat-meta">
-                            In <a href="{{ url_for('categories', category=blog.category.id, page=1) }}">{{blog.category.cat_name}}</a>
+                            In <a href="{{ url_for('categories', category_id=blog.category.id, page=1) }}">{{blog.category.cat_name}}</a>
                         </div>
                         <div class="eskimo-date-meta">{{blog.date_posted}}</div>
                         <div class="eskimo-reading-meta">{{ blog.read_time }} min read</div>

@@ -23,7 +23,7 @@
                                 <div class="card-border">
                                     <div class="card-body">
                                         <div class="card-category">
-                                            <span><a href="{{ url_for('categories', category=blog.category.id, page=1) }}">{{ blog.category.cat_name }}</a></span>
+                                            <span><a href="{{ url_for('categories', category_id=blog.category.id, page=1) }}">{{ blog.category.cat_name }}</a></span>
                                         </div>
                                         <h3 class="card-title">
                                             <a href="{{ url_for('get_single_post', selected_id=blog.blog_id) }}">{{ blog.title }}</a>
