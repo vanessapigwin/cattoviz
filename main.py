@@ -104,10 +104,10 @@ def all_blogs(page=1):
 @app.route('/category/<int:category_id>/<int:page>')
 def categories(category_id, page=1):
     per_page = 4
-    category_queried = Category.query.filter_by(id=category_id).first()
+    category_queried = Category.query.get(category_id)
     category_title = category_queried.cat_name
     blogs = BlogEntry.query.order_by(BlogEntry.date_posted.desc())\
-        .filter(BlogEntry.category_id.contains(category_id))\
+        .filter(BlogEntry.category_id==category_id)\
         .paginate(page, per_page=per_page, max_per_page=per_page, error_out=True)
     return render_template('category.html', category=category_title, blogs=blogs)
 
