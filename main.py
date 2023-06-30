@@ -130,9 +130,9 @@ def all_with_tag(tag, page=1):
     return render_template('search.html', tag=tag, blogs=blogs)
 
 
-# @app.route('/applications')
-# def applications():
-#     return render_template('app-gallery.html')
+@app.route('/applications')
+def applications():
+    return render_template('app-gallery.html')
 
 if __name__ == '__main__':
     app.run(debug=False)
