@@ -3,6 +3,7 @@ version: "3.3"
 services:
   web:
     container_name: catto_flask
+    restart: unless-stopped
     build: .
     ports:
       - "8000:5000"
